@@ -1,0 +1,9 @@
+spring:
+  activemq:
+    broker-url: tcp://127.0.0.1:61616
+  data:
+    mongodb:
+      database: temp
+
+server:
+  port : 8081
