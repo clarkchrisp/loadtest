@@ -33,21 +33,32 @@ public class TransactionController {
             transaction.setTransactionId("TXN" + RandomStringUtils.randomNumeric(6));
             transaction.setToAccount("TAC" + RandomStringUtils.randomNumeric(6));
             transaction.setFromAccount("FAC" + RandomStringUtils.randomNumeric(6));
-            transaction.setDescription(generateString(random.nextInt(6)).trim());
+            transaction.setDescription(generateString(random.nextInt(6), i).trim());
             transaction.setAmount(new BigDecimal(Math.random()).setScale(2, BigDecimal.ROUND_HALF_UP));
             producer.send(transaction);
         }
     }
 
 
-    private String generateString(int length) {
-        length = length == 0 ? 1 : length;
+    private String generateString(int length, int messageCount) {
 
-        var description = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            description.append(RandomStringUtils.randomAlphabetic(2, 10) + " ");
+        switch (messageCount) {
+            case 10:
+                return "Hope you die";
+            case 20:
+                return "choke on this money";
+            case 30:
+                return "stupid bitch";
+            default:
+                length = length == 0 ? 1 : length;
+                var description = new StringBuilder();
+                for (int i = 0; i < length; i++) {
+                    description.append(RandomStringUtils.randomAlphabetic(2, 10) + " ");
+                }
+                return description.toString();
         }
-        return description.toString();
+
+
     }
 
 }
